@@ -1,6 +1,6 @@
 .Phony: clean all
 
-all: dir figure/change_in_emissions.png data/top_emitters
+all: dir figure/change_in_emissions.png figure/global_emissions.png figure/table_plot.png data/top_emitters data/data.csv
 
 # Create the output directory if it doesn't exist
 dir:
@@ -13,9 +13,9 @@ clean:
 	rm -rf data
 
 #data
-data/top_emitters: fossil-fuel-co2-emissions-by-nation.csv
+data/top_emitters data/data.csv: fossil-fuel-co2-emissions-by-nation.csv
 	Rscript project.R
 
 #ggplot
-figure/change_in_emissions.png: fossil-fuel-co2-emissions-by-nation.csv
+figure/change_in_emissions.png figure/table_plot.png figure/global_emissions.png: fossil-fuel-co2-emissions-by-nation.csv
 	Rscript project.R
